@@ -1,5 +1,14 @@
 import React, { PropTypes } from 'react';
 
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import BigCalendar from 'react-big-calendar';
+import moment from 'moment';
+BigCalendar.setLocalizer(
+  BigCalendar.momentLocalizer(moment)
+);
+
+import events from "../events"
+
 export default class HelloWorld extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired, // this is passed from the Rails view
@@ -39,6 +48,13 @@ export default class HelloWorld extends React.Component {
             onChange={(e) => this.updateName(e.target.value)}
           />
         </form>
+
+        <div style={{height: "100vh"}}>
+          <BigCalendar
+                  events={events}
+                  defaultDate={new Date(2015, 3, 1)}
+                />
+        </div>
       </div>
     );
   }

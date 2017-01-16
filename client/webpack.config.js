@@ -10,8 +10,8 @@ const nodeEnv = devBuild ? 'development' : 'production';
 
 const config = {
   entry: [
-    'es5-shim/es5-shim',
-    'es5-shim/es5-sham',
+    // 'es5-shim/es5-shim',
+    // 'es5-shim/es5-sham',
     'babel-polyfill',
     './app/bundles/HelloWorld/startup/registration',
   ],
@@ -23,10 +23,10 @@ const config = {
 
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    alias: {
-      react: path.resolve('./node_modules/react'),
-      'react-dom': path.resolve('./node_modules/react-dom'),
-    },
+    // alias: {
+    //   react: path.resolve('./node_modules/react'),
+    //   'react-dom': path.resolve('./node_modules/react-dom'),
+    // },
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -37,14 +37,17 @@ const config = {
   ],
   module: {
     loaders: [
-      {
-        test: require.resolve('react'),
-        loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
-      },
+      // {
+      //   test: require.resolve('react'),
+      //   loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
+      // },
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        query: {
+          presets: ['react', 'es2015', 'stage-1']
+        }
       },
       { test: /\.css$/, loader: "style!css" },
     ],
